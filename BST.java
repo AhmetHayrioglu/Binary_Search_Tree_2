@@ -6,17 +6,39 @@ public class BST {
 	public BST(BSTNode root) {
 		this.root = root;
 	}
+	
 	public BST(int value) {
 		this.root = new BSTNode(value);
 	}
+	
 	public BST() {
 		this.root = null;
 	}
+	
+	public BSTNode getRoot()
+	{
+		return this.root;
+	}
+	
+	public void setRoot(int value)
+	{
+		if(this.root == null)
+		{
+			this.root = new BSTNode(value);
+		}
+		else
+		{
+			this.root.setValue(value);
+		}
+		
+	}
+	
 	
 	public void insert(int value){
 		BSTNode newNode = new BSTNode(value);
 		insert(newNode);
 	}
+	
 	
 	private void insert(BSTNode newNode)
 	{
@@ -93,19 +115,136 @@ public class BST {
 		return;
 	}
 	
+	
 	public void InOrder(){
 		InOrder(this.root);
+		System.out.println();
 	}
 	
 	
-	public BSTNode delete(int value){
+	public BSTNode findMin(){
+		return findMin(this.root);
+	}
+	
+	private BSTNode findMin(BSTNode node) {
+	    if (node == null) return null;
+
+	    while (node.getLeft() != null) {
+	        node = node.getLeft();
+	    }
+
+	    return node;
+	}
+
+	
+	
+	
+	public BSTNode delete(int value)
+	{
+		if(this.root.getValue() == value) {
+			return deleteRoot(this.root);
+		}
+		
 		return delete(this.root, this.root, value);
 	}
 	
-	private BSTNode delete(BSTNode current, BSTNode parent, int value) {
+	private BSTNode deleteRoot(BSTNode root)
+	{ //handles the special case of root deletion
+		switch(root.getChildStatus())
+		{
+		case BOTH:
+			int sValue = successorReplace(root);
+			delete(root.getRight(), root, sValue);
+			return this.root;
+		case LEAF:
+			this.root = null;
+			return this.root;
+			
+		case ONLY_LEFT:
+			this.root = root.getLeft();
+			return this.root;
+			
+		case ONLY_RIGHT:
+			this.root = root.getRight();
+			return this.root;
+		default:
+			return null;
+		}
+	}
+	
+
+	private BSTNode delete(BSTNode currentNode , BSTNode parentNode, int value) {
 		
+		if(currentNode == null) //base case 1:value to be deleted does not exist
+			return null;
 		
+		int currentValue = currentNode.getValue();
+		int parentValue = parentNode.getValue();
+		
+		if(currentValue == value)//base case 2: node containing value to be deleted is found
+		{
+			switch(currentNode.getChildStatus())
+			{
+			case BOTH:
+				int sValue = successorReplace(currentNode);
+				return delete(currentNode.getRight(), currentNode, sValue);
+				
+				
+			case LEAF:
+				if(currentValue >= parentValue)
+				{
+					parentNode.setRight(null);
+				}
+				else if(currentValue < parentValue)
+				{
+					parentNode.setLeft(null);
+				}
+				return this.root;
+	
+			case ONLY_LEFT:
+				if(currentValue >= parentValue)
+				{
+					parentNode.setRight(currentNode.getLeft());
+			    }
+				else if(currentValue < parentValue)
+				{
+					parentNode.setLeft(currentNode.getLeft());
+				}
+				return this.root;
+				
+			case ONLY_RIGHT:
+				if(currentValue >= parentValue)
+				{
+					parentNode.setRight(currentNode.getRight());
+			    }
+				else if(currentValue < parentValue)
+				{
+					parentNode.setLeft(currentNode.getRight());
+				}
+				return this.root;
+				
+			default:
+				return null;
+			}
+		}
+		
+		//recursive case goal is to traverse the tree to find node to be deleted
+		if(value >= currentValue) {
+			return delete(currentNode.getRight(), currentNode, value);
+		}
+		else if(value < currentValue)
+		{
+			return delete(currentNode.getLeft(), currentNode, value);
+		}
 		
 		return null;
+	}
+
+	
+	private int successorReplace(BSTNode node)
+	{
+		BSTNode successor = findMin(node.getRight()); //reminder: findMin() returns the parent of the minimum
+		node.setValue(successor.getValue());
+		return successor.getValue();
 	}
 }

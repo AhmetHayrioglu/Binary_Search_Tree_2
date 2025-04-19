@@ -12,6 +12,20 @@ public class Tester {
 		tree.insert(49);
 		tree.insert(150);
 		tree.InOrder();
+		BSTNode min = tree.findMin();
+		System.out.printf("minimum value of the tree is %d \n", min.getValue());
+		
+	//Testing delete(int value):
+		//deleting value at root:
+		tree.delete(50);
+		tree.InOrder();
+		
+		//deleting a leaf:
+		tree.delete(150);
+		tree.InOrder();
+		//deleting a node with only one child
+		tree.delete(45);
+		tree.InOrder();
 	}
 	
 	
