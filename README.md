@@ -1,9 +1,9 @@
 # Binary Search Tree (BST) — Object-Oriented Java Implementation
 
 This project is a clean and modular re-implementation of a Binary Search Tree (BST) in Java. It was designed with a strong emphasis on **readability**, **maintainability**, and **object-oriented principles**, and reflects my growth as a software developer.
-link for old repo: https://github.com/AhmetHayrioglu/Binary-Search-Tree
 ---
 
+link for old repo: https://github.com/AhmetHayrioglu/Binary-Search-Tree
 ## 🧠 Motivation
 
 While my earlier BST implementation was functional, it lacked structure and scalability. This version was rewritten from the ground up to:
