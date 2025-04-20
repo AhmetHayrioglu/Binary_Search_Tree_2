@@ -15,7 +15,9 @@ public class Tester {
 		BSTNode min = tree.findMin();
 		System.out.printf("minimum value of the tree is %d \n", min.getValue());
 		
-	//Testing delete(int value):
+		tree.setDrawMethod(new BasicTreeDraw(600, 900));
+		tree.draw();
+	 /*//Testing delete(int value):
 		//deleting value at root:
 		tree.delete(50);
 		tree.InOrder();
@@ -26,6 +28,7 @@ public class Tester {
 		//deleting a node with only one child
 		tree.delete(45);
 		tree.InOrder();
+	*/
 	}
 	
 	

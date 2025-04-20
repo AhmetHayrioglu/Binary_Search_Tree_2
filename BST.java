@@ -2,7 +2,7 @@ package Binary_Search_Tree_2;
 
 public class BST {
 	private BSTNode root;
-	
+	private TreeDrawer TD;
 	public BST(BSTNode root) {
 		this.root = root;
 	}
@@ -246,5 +246,35 @@ public class BST {
 		BSTNode successor = findMin(node.getRight()); //reminder: findMin() returns the parent of the minimum
 		node.setValue(successor.getValue());
 		return successor.getValue();
+	}
+
+	
+	public static int getDepth(TreeNode node)
+	{
+		if(node == null) return 0;
+		
+		return 1 + Math.max(getDepth(node.getLeft()), getDepth(node.getRight()));
+	}
+	
+	public int getDepth(){
+		return getDepth(this.root);
+	}
+	public TreeDrawer getDrawMethod() {
+		return TD;
+	}
+	
+
+	public void setDrawMethod(TreeDrawer tD) {
+		TD = tD;
+	}
+	
+	public void draw()
+	{
+		if(this.TD == null)
+		{
+			System.out.println("TreeDraw method not initilized! set a draw method first. ");
+			return;
+		}
+		this.TD.draw(this.root);
 	}
 }
