@@ -2,8 +2,6 @@
 
 This project is a clean and modular re-implementation of a Binary Search Tree (BST) in Java. It was designed with a strong emphasis on **readability**, **maintainability**, and **object-oriented principles**, and reflects my growth as a software developer.
 
-> 🎯 I'm currently looking for an internship where I can contribute to real-world projects and continue growing as an engineer. This project showcases my approach to designing thoughtful, extensible, and well-structured code.
-
 ---
 
 ## 🧠 Motivation
